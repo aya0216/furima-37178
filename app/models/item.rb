@@ -1,8 +1,4 @@
 class Item < ApplicationRecord
-  belongs_to :user
-  has_one :order
-  has_one_attached :image
-
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :status
@@ -10,11 +6,24 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :ship_date
 
-  with_options numericality: { other_than: 1 } do
-    validates :category_id
-    validates :status_id
-    validates :postage_id
-    validates :prefecture_id
-    validates :ship_date_id
+
+  belongs_to :user
+  has_one :order
+  has_one_attached :image
+
+  with_options presence: true do
+    validates :category_id, numericality: { other_than: 1 }
+    validates :status_id, numericality: { other_than: 1 }
+    validates :postage_id, numericality: { other_than: 1 }
+    validates :prefecture_id, numericality: { other_than: 1 }
+    validates :ship_date_id, numericality: { other_than: 1 }
   end
+
+  with_options presence: true do
+    validates :image
+    validates :title
+    validates :info
+    validates :price
+  end
+
 end
