@@ -15,12 +15,13 @@ class Item < ApplicationRecord
     validates :image
     validates :title
     validates :info
-    validates :category_id, numericality: { other_than: 1 , message: "can't be blank" }
-    validates :status_id, numericality: { other_than: 1 , message: "can't be blank" }
-    validates :postage_id, numericality: { other_than: 1 , message: "can't be blank" }
-    validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank" }
-    validates :ship_date_id, numericality: { other_than: 1 , message: "can't be blank" }
-    validates :price, format: { with: /\A[0-9]+\z/ }, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_wqual_to: 9_999_999 }
+    validates :price, format: { with: /\A[0-9]+\z/, message: ' is invalid. Input half-width characters'}, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_wqual_to: 9_999_999 }
   end
-
+  with_options numericality: { other_than: 1 , message: "can't be blank" } do
+    validates :category_id
+    validates :status_id
+    validates :postage_id
+    validates :prefecture_id
+    validates :ship_date_id
+  end
 end
