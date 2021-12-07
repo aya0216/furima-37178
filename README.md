@@ -28,7 +28,7 @@
 | status_id          | integer    | null: false                    |
 | postage_id         | integer    | null: false                    |
 | prefecture_id      | integer    | null: false                    |
-| ship _date_id      | integer    | null: false                    |
+| ship_date_id       | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
